@@ -54,15 +54,15 @@ public class ImageLoaderUtil {
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration
                 .Builder(context)
-                .threadPoolSize(THREAD_COUNT)
+                .threadPoolSize(THREAD_COUNT)//配置图片下载线程最大数量
                 .threadPriority(Thread.NORM_PRIORITY - PRIORITY)
-                .denyCacheImageMultipleSizesInMemory()
+                .denyCacheImageMultipleSizesInMemory()//防止缓存多套图片到内存中
                 //.memoryCache(new UsingFreqLimitedMemoryCache(MEMORY_CACHE_SIZE))
-                .memoryCache(new WeakMemoryCache())
-                .diskCacheSize(DISK_CACHE_SIZE)
+                .memoryCache(new WeakMemoryCache())//使用弱引用内存缓存
+                .diskCacheSize(DISK_CACHE_SIZE)//硬盘缓存大小
                 .diskCacheFileNameGenerator(new Md5FileNameGenerator())//将保存的时候的URI名称用MD5 加密
-                .tasksProcessingOrder(QueueProcessingType.LIFO)
-                .defaultDisplayImageOptions(getDefaultOptions())
+                .tasksProcessingOrder(QueueProcessingType.LIFO)//图片下载顺序
+                .defaultDisplayImageOptions(getDefaultOptions())//默认图片加载顺序
                 .imageDownloader(new BaseImageDownloader(context, CONNECTION_TIME_OUT, READ_TIME_OUT))
                 .writeDebugLogs()
                 .build();
